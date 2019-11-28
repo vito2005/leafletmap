@@ -34,55 +34,55 @@ import tank from '@/assets/images/order-type-tank.png';
 import tractor from '@/assets/images/order-type-tractor.png';
 import trailer_semi_trailer from '@/assets/images/order-type-trailer_semi_trailer.png';
 
-L.Canvas.include({
-    _updateMarker6Point: function (layer) {
-        if (!this._drawing || layer._empty()) { return; }
-
-        var p = layer._point,
-            ctx = this._ctx,
-            r = Math.max(Math.round(layer._radius), 1);
-        this._drawnLayers = {};
-        this._drawnLayers[layer._leaflet_id] = layer;
-
-        function roundedRect(ctx,x,y,width,height,radius){
-            ctx.beginPath();
-            ctx.moveTo(x,y+radius);
-            ctx.lineTo(x,y+height-radius);
-            ctx.quadraticCurveTo(x,y+height,x+radius,y+height);
-            ctx.lineTo(x+width-radius,y+height);
-            ctx.quadraticCurveTo(x+width,y+height,x+width,y+height-radius);
-            ctx.lineTo(x+width,y+radius);
-            ctx.quadraticCurveTo(x+width,y,x+width-radius,y);
-            ctx.lineTo(x+radius,y);
-            ctx.quadraticCurveTo(x,y,x,y+radius);
-            ctx.stroke();
-            ctx.fillStyle = 'white';
-            ctx.fill();
-        }
-        ctx.fillStyle = '#27AE60';
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.arc(p.x + 3,p.y+7,11,0,4*Math.PI, true);
-        ctx.lineWidth = 2;
-        ctx.fill();
-        ctx.stroke();
-
-        roundedRect(ctx,p.x - 3,p.y + 4,12,9,4);
-        ctx.fillStyle = '#27AE60';
-        ctx.strokeStyle = '#27AE60';
-        ctx.beginPath();
-        ctx.arc(p.x + 3,p.y + 9,0.5,0,2*Math.PI);
-        ctx.fill();
-        ctx.stroke();
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.arc(Math.round(p.x) + 3,Math.round(p.y) + 3,3,0,Math.PI, true);
-        ctx.scale(0.3, 0.3);
-        ctx.stroke();
-        this._fillStroke(ctx, layer);
-    }
-});
+// L.Canvas.include({
+//     _updateMarker6Point: function (layer) {
+//         if (!this._drawing || layer._empty()) { return; }
+//
+//         var p = layer._point,
+//             ctx = this._ctx,
+//             r = Math.max(Math.round(layer._radius), 1);
+//         this._drawnLayers = {};
+//         this._drawnLayers[layer._leaflet_id] = layer;
+//
+//         function roundedRect(ctx,x,y,width,height,radius){
+//             ctx.beginPath();
+//             ctx.moveTo(x,y+radius);
+//             ctx.lineTo(x,y+height-radius);
+//             ctx.quadraticCurveTo(x,y+height,x+radius,y+height);
+//             ctx.lineTo(x+width-radius,y+height);
+//             ctx.quadraticCurveTo(x+width,y+height,x+width,y+height-radius);
+//             ctx.lineTo(x+width,y+radius);
+//             ctx.quadraticCurveTo(x+width,y,x+width-radius,y);
+//             ctx.lineTo(x+radius,y);
+//             ctx.quadraticCurveTo(x,y,x,y+radius);
+//             ctx.stroke();
+//             ctx.fillStyle = 'white';
+//             ctx.fill();
+//         }
+//         ctx.fillStyle = '#27AE60';
+//         ctx.beginPath();
+//         ctx.strokeStyle = 'white';
+//         ctx.arc(p.x + 3,p.y+7,11,0,4*Math.PI, true);
+//         ctx.lineWidth = 2;
+//         ctx.fill();
+//         ctx.stroke();
+//
+//         roundedRect(ctx,p.x - 3,p.y + 4,12,9,4);
+//         ctx.fillStyle = '#27AE60';
+//         ctx.strokeStyle = '#27AE60';
+//         ctx.beginPath();
+//         ctx.arc(p.x + 3,p.y + 9,0.5,0,2*Math.PI);
+//         ctx.fill();
+//         ctx.stroke();
+//         ctx.lineWidth = 2;
+//         ctx.beginPath();
+//         ctx.strokeStyle = 'white';
+//         ctx.arc(Math.round(p.x) + 3,Math.round(p.y) + 3,3,0,Math.PI, true);
+//         ctx.scale(0.3, 0.3);
+//         ctx.stroke();
+//         this._fillStroke(ctx, layer);
+//     }
+// });
 
 export default {
 
@@ -365,25 +365,25 @@ export default {
             const { pins } = this;
 
             Promise.all(lines).then(() => {
-                const polyLinesLayer = L.geoJSON(lines, {
-                    style: (feature) => {
-                        switch (feature.properties.colorName) {
-                        case 'green':
-                            return { color: '#27AE60' };
-                        case 'orange':
-                            return { color: '#F2994A' };
-                        case 'red':
-                            return { color: '#EB5757' };
-                        case 'yellow':
-                            return { color: '#fff100' };
-                        default:
-                            return { color: '#27AE60' };
-                        }
-                    },
-                });
-
-                polyLinesLayer.addTo(this.mapInstance);
-                this.polyLines.push(polyLinesLayer);
+                // const polyLinesLayer = L.geoJSON(lines, {
+                //     style: (feature) => {
+                //         switch (feature.properties.colorName) {
+                //         case 'green':
+                //             return { color: '#27AE60' };
+                //         case 'orange':
+                //             return { color: '#F2994A' };
+                //         case 'red':
+                //             return { color: '#EB5757' };
+                //         case 'yellow':
+                //             return { color: '#fff100' };
+                //         default:
+                //             return { color: '#27AE60' };
+                //         }
+                //     },
+                // });
+                //
+                // polyLinesLayer.addTo(this.mapInstance);
+                // this.polyLines.push(polyLinesLayer);
 
                 const onEachFeature = (feature, layer) => {
                     layer.on('click', (e) => {
@@ -396,9 +396,9 @@ export default {
                    // layer.bindTooltip(layerTt => `<div class="device_tooltip"><h2><span>${this.$t('component.leaflet.serial_number')}</span> ${feature.properties.serial_number}</h2></div>`);
                 };
                 var Marker6Point = L.CircleMarker.extend({
-                    _updatePath: function () {
-                        this._renderer._updateMarker6Point(this);
-                    }
+                    // _updatePath: function () {
+                    //     this._renderer._updateMarker6Point(this);
+                    // }
                 });
 
 
@@ -515,7 +515,7 @@ export default {
                 zoomSnap: 0.5,
                 zoomControl: false,
                 wheelPxPerZoomLevel: 120,
-                maxZoom: 20,
+                maxZoom: 15,
                 minZoom: 3,
                 zoomAnimation: true,
             }).setView(this.mapCenter(), 3);
@@ -543,7 +543,7 @@ export default {
                 map.scrollWheelZoom.disable();
             }
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                maxZoom: 18,
+                maxZoom: 15,
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
                     '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
                     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -674,7 +674,7 @@ export default {
             this.vehicles = null;
 
             this.records = pointsData[0].result.points; // records
-            this.zoom = 16;
+            this.zoom = 12;
         },
         setViewOnLastPoint(value) {
             if (value.length > 0) {
